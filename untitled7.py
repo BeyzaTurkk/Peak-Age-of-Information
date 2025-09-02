@@ -468,7 +468,7 @@ def plot_correlated_resets_vs_burst(
             else:
                 q = float(epsilon) * r / max(1e-12, (1.0 - float(epsilon)))
 
-            # Use bellman_minimize_peak_with_external with the computed alpha
+
             _, policy = bellman_minimize_peak_with_external(N, M, p=1.0-epsilon, alpha=alpha)
 
             def factory(run_seed):
@@ -506,7 +506,7 @@ def plot_iid_resets_vs_epsilon(
         y_vals = []
         for eps in eps_list:
             p = 1.0 - float(eps)
-            # Use bellman_minimize_peak_with_external with the computed alpha
+
             _, policy = bellman_minimize_peak_with_external(N, M, p, alpha)
 
             def factory(run_seed):
@@ -529,7 +529,7 @@ def plot_iid_resets_vs_epsilon(
     plt.tight_layout()
     plt.show()
 
-# 3) Trade-off: x-axis M, y-axis K, iso-peak contour lines
+# 3) Trade-off: x-axis M, y-axis K, iso-peak lines
 def plot_tradeoff_K_vs_M_isopeak(
     N=100,
     M_values=(1,2,3,4,5,6,8,10,12),
@@ -545,7 +545,7 @@ def plot_tradeoff_K_vs_M_isopeak(
     for M in M_values:
         for K in K_values:
             alpha = alpha_from_K(K, N)
-            # Use bellman_minimize_peak_with_external with the computed alpha
+
             _, pol = bellman_minimize_peak_with_external(N, M, p, alpha)
             policies[(M, K)] = pol
 
@@ -582,7 +582,6 @@ def plot_peak_vs_K(
     y_vals = []
     for K in K_values:
         alpha = alpha_from_K(K, N)
-        # Use bellman_minimize_peak_with_external with the computed alpha
         _, policy = bellman_minimize_peak_with_external(N, M, p, alpha)
 
         def factory(run_seed):
